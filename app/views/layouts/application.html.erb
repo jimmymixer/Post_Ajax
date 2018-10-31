@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PostAjax</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="container">
+        <div class="navbar-header">
+          <%= link_to "Post Brand Site", root_path, class: "navbar-brand" %>
+        </div>
+
+        <ul class="nav navbar-nav">
+          <% if current_user.present? %>
+            <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to log out?" } %></li>
+          <% else %>
+            <li><%= link_to "Sign Up", new_user_registration_path %></li>
+            <li><%= link_to "Log In", new_user_session_path %></li>
+          <% end %>
+        </ul>
+
+        <% if user_signed_in? %>
+          <%= link_to "New Post", new_post_path, class: "navbar-text navbar-link navbar-right" %>
+        <% end %>
+        </div>
+
+      </div>
+    </nav>
+
+    <div class="container">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
+
+  </body>
+</html>
